@@ -103,3 +103,77 @@ print(next(list_job))
 # job start
 # 1초 대기
 # done
+
+print('='*30)
+print("제너레이터 연습")
+print('='*30)
+
+print("방법 1: yield 함수 이용(제너레이터 함수)")
+def square_generator(n):
+    for i in range(1, n+1):
+        yield i ** 2
+for num in square_generator(5):
+    print(num)
+
+print("방법2: 제너레이터 표현식")
+generator = (i ** 2 for i in range(1, 6))
+for num in generator:
+    print(num)
+
+print("방법3: 리스트 컴프리헨션")
+n = int(input("n을 입력하세요: "))
+result = [i ** 2 for i in range(1, n + 1)]
+for num in result:
+    print(num)
+
+print("방법4: map, lmabda, range를 이용")
+result = map(lambda x: x ** 2, range(1, 6))
+for num in result:
+    print(num)
+
+print("방법5: iterator 클래스 - 모든 제너레이터는 이터레이터이다")
+class SquareIterator:
+    def __init__(self, n):
+        self.n = n
+        self.current = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current > self.n:
+            raise StopIteration
+        value = self.current ** 2
+        self.current += 1
+        return value
+
+n = int(input("n을 입력하세요: "))
+
+for num in SquareIterator(n):
+    print(num)
+
+
+print("방법6: iterable 클래스")
+class SquareIterator:
+    def __init__(self, n):
+        self.n = n
+        self.current = 1
+
+    def __next__(self):
+        if self.current > self.n:
+            raise StopIteration
+        value = self.current ** 2
+        self.current += 1
+        return value
+
+class SquareIterable:
+    def __init__(self, n):
+        self.n = n
+
+    def __iter__(self):
+        return SquareIterator(self.n)
+
+n = int(input("n을 입력하세요: "))
+
+for num in SquareIterable(n):
+    print(num)
