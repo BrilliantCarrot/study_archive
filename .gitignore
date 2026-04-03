@@ -27,3 +27,4 @@ obj/
 *.gz
 *ubyte
 __pycache__/
+data/
