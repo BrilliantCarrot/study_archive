@@ -24,4 +24,6 @@ obj/
 *.png
 *.jpg
 *.txt
+*.gz
+*ubyte
 __pycache__/
